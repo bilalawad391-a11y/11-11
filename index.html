@@ -1,0 +1,501 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>11:11 | November 🖤</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;min-height:100vh;padding:16px;
+background:radial-gradient(ellipse at top,#30243d,#111018 55%,#050507);
+color:#f7f2ff;font-family:Arial,sans-serif;
+}
+.container{width:100%;max-width:680px;margin:35px auto}
+.card{
+background:linear-gradient(145deg,#1c1824,#111116);
+border:1px solid #51445f;border-radius:26px;
+padding:26px 20px;text-align:center;
+box-shadow:0 18px 50px #0009;margin-bottom:18px;
+}
+h1{font-size:30px;color:#eee4ff}
+h2{color:#e1d3fa}
+p{font-size:17px;line-height:1.9;color:#c9c0d2}
+button{
+border:1px solid #9279b4;border-radius:15px;
+padding:13px 18px;background:linear-gradient(135deg,#71558f,#352943);
+color:white;font-size:16px;font-weight:bold;cursor:pointer;
+}
+button:active{transform:scale(.97)}
+button:disabled{opacity:.5}
+.primary{width:100%;margin-top:14px}
+.hidden{display:none!important}
+.icon{font-size:65px;margin:10px}
+.date{font-size:14px;letter-spacing:3px;color:#bda8dc}
+.time{font-size:58px;font-weight:bold;color:#e8d8ff;margin:12px 0;text-shadow:0 0 25px #a78bfa66}
+.pill{background:#292431;border:1px solid #51465f;padding:7px 12px;border-radius:30px}
+.topline{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.progress{height:13px;background:#302b38;border-radius:20px;overflow:hidden;margin:17px 0 22px}
+.fill{height:100%;width:0;background:linear-gradient(90deg,#6f5b91,#c5afea);transition:.4s}
+.play-area{
+height:280px;position:relative;overflow:hidden;
+border-radius:20px;border:1px solid #51445f;
+background:radial-gradient(circle,#292132,#17141e);
+margin:18px 0;
+}
+.target{
+position:absolute;font-size:40px;cursor:pointer;
+user-select:none;filter:drop-shadow(0 0 10px #c4a5ff);
+animation:pop .5s ease;
+}
+@keyframes pop{from{transform:scale(.2)}to{transform:scale(1)}}
+.memory-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:18px}
+.memory-card{
+height:75px;border:1px solid #625274;background:#26212e;
+border-radius:14px;display:grid;place-items:center;
+font-size:29px;cursor:pointer;
+}
+.memory-card.done{background:#314536;border-color:#6c9b75}
+.answers{display:grid;gap:10px;margin-top:18px}
+.answer{width:100%;background:#24202d}
+.good{background:#24583d!important}
+.bad{background:#63313b!important}
+.big-star{
+font-size:75px;display:inline-block;cursor:pointer;
+filter:drop-shadow(0 0 15px #e9c8ff);
+animation:pulse .8s infinite alternate;
+}
+@keyframes pulse{to{transform:scale(1.15)}}
+.reaction{
+height:170px;border:1px solid #625274;border-radius:20px;
+background:#282431;display:grid;place-items:center;
+font-size:23px;font-weight:bold;margin:20px 0;cursor:pointer;
+}
+.message{
+background:linear-gradient(145deg,#25202e,#191620);
+border:1px solid #625274;border-radius:20px;
+padding:22px 18px;margin-top:22px;
+font-family:'Amiri',serif;font-size:23px;
+font-weight:bold;line-height:2.15;color:#f0e3ff;text-align:center;
+}
+textarea{
+width:100%;min-height:130px;background:#0e0d12;color:white;
+border:1px solid #625274;border-radius:15px;padding:14px;
+font:18px 'Amiri',serif;resize:vertical;
+}
+.small{font-size:13px}
+.footer{margin-top:20px;font-size:13px;color:#887b99}
+.star-bg{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
+.twinkle{position:absolute;color:#d9c5ff;animation:blink 2s infinite alternate}
+@keyframes blink{to{opacity:.2;transform:scale(.6)}}
+.heart-float{
+position:fixed;bottom:-30px;pointer-events:none;
+animation:rise 7s linear forwards;z-index:10;
+}
+@keyframes rise{to{transform:translateY(-110vh) rotate(360deg);opacity:0}}
+</style>
+</head>
+
+<body>
+<div class="star-bg" id="starBg"></div>
+
+<main class="container">
+
+<section class="card" id="welcome">
+<div class="icon">🕰️</div>
+<div class="date">NOVEMBER • 11</div>
+<div class="time">11:11</div>
+<h1>لحظة مميزة لشخص مميز 🖤</h1>
+<p>
+مش كل الأيام بتكون عادية<br>
+وفي أوقات بتكون مميزة لمجرد إنها بتفكرنا بأشخاص غاليين علينا
+</p>
+<p>وعشان النهارده 11 / 11 والساعة 11:11 حبيت أقولك حاجة ❤️</p>
+<button class="primary" onclick="startGame()">ابدئي المغامرة 🎮</button>
+<div class="footer">A little message for someone special</div>
+</section>
+
+<section class="card hidden" id="game">
+<div class="topline">
+<span class="pill" id="stageLabel">اللعبة 1 من 5</span>
+<span class="pill">✨ <span id="score">0</span>%</span>
+</div>
+<div class="progress"><div class="fill" id="progressFill"></div></div>
+
+<!-- اللعبة الأولى -->
+<div id="stage1">
+<div class="icon">💜</div>
+<h2>اجمعي النجوم</h2>
+<p>قدامك 5 نجوم مخبّيين، دوري عليهم واضغطي عليهم كلهم!</p>
+<div class="play-area" id="starArea"></div>
+<p>النجوم اللي جمعتيها: <b id="starCount">0</b> / 5</p>
+</div>
+
+<!-- اللعبة الثانية -->
+<div id="stage2" class="hidden">
+<div class="icon">🧩</div>
+<h2>اختبار الذاكرة</h2>
+<p>افتحي الكروت وطابقي كل رمزين شبه بعض.</p>
+<div class="memory-grid" id="memoryGrid"></div>
+<p id="memoryStatus"></p>
+</div>
+
+<!-- اللعبة الثالثة -->
+<div id="stage3" class="hidden">
+<div class="icon">🧠</div>
+<h2>اختبار الذكاء</h2>
+<p id="questionText"></p>
+<div class="answers" id="answerList"></div>
+<p id="quizFeedback"></p>
+</div>
+
+<!-- اللعبة الرابعة -->
+<div id="stage4" class="hidden">
+<div class="icon">⭐</div>
+<h2>نجمة الأمنيات</h2>
+<p>اضغطي على النجمة 10 مرات عشان تجمعي طاقة المفاجأة!</p>
+<div class="big-star" onclick="tapStar()">⭐</div>
+<p>الضغطات: <b id="tapCount">0</b> / 10</p>
+</div>
+
+<!-- اللعبة الخامسة -->
+<div id="stage5" class="hidden">
+<div class="icon">⚡</div>
+<h2>تحدي سرعة البديهة</h2>
+<p>استني لحد ما تظهر الإشارة الخضراء، وبعدها اضغطي بسرعة!</p>
+<div class="reaction" id="reactionBox" onclick="reactionClick()">استني الإشارة... ⏳</div>
+<p id="reactionResult"></p>
+</div>
+
+</section>
+
+<!-- الرسالة النهائية -->
+<section class="card hidden" id="final">
+<div class="icon">💌</div>
+<div class="date">NOVEMBER • 11 • 11:11</div>
+<h1>إلى شخص غالي 🖤</h1>
+
+<div class="message">
+بما ان اليوم والوقت ده مميزه حبية يعني اقولك انك بنسبالي من افضل واجمل الناس العرفتهم بعتبرك كا اختي الكبيره بكون فراحان لما اتكلم معاكي فا بعد كده لا تفكرني بسحب عليك عشان مش طايقك وكده بل عكس بكون فرحان جدا اني بكلمك بس انا مبقدرش ارد عليك بسبب اني ممكن اخسرك بكلامي وانتي بنسبه ليا اختي كبيره فا ياريت متزعليش مني تاني ❤️
+</div>
+
+<p>
+11:11 مش مجرد وقت مميز<br>
+دي كانت فرصتي أقولك إن وجودك غالي عندي 🖤
+</p>
+
+<div class="message" style="font-family:Arial,sans-serif;font-size:17px">
+<h2>💌 رسالة منك ليا</h2>
+<p>بعد ما شوفتِ الرسالة، حابة تقوليلي إيه؟ ❤️</p>
+<textarea id="reply" placeholder="اكتبي رسالتك هنا..."></textarea>
+<button class="primary" id="sendButton" onclick="sendReply()">إرسال الرسالة 💌</button>
+<p id="replyStatus" class="small"></p>
+</div>
+
+<button class="primary" onclick="celebrate()">احتفلي باللحظة 🎉</button>
+<div class="footer">11:11 — A moment to remember 🖤</div>
+</section>
+
+</main>
+
+<script>
+let soundOn=true,audioContext;
+let score=0;
+let currentQuestion=0;
+let taps=0;
+let reactionReady=false,reactionStart=0,reactionTimer;
+let starsCollected=0;
+
+function tone(freq=500,duration=.12,type="sine"){
+if(!soundOn)return;
+try{
+audioContext=audioContext||new(window.AudioContext||window.webkitAudioContext)();
+if(audioContext.state==="suspended")audioContext.resume();
+let osc=audioContext.createOscillator();
+let gain=audioContext.createGain();
+osc.type=type;
+osc.frequency.value=freq;
+gain.gain.setValueAtTime(.07,audioContext.currentTime);
+gain.gain.exponentialRampToValueAtTime(.001,audioContext.currentTime+duration);
+osc.connect(gain);gain.connect(audioContext.destination);
+osc.start();osc.stop(audioContext.currentTime+duration);
+}catch(e){}
+}
+function successSound(){
+tone(650,.15);
+setTimeout(()=>tone(820,.18),150);
+setTimeout(()=>tone(1050,.25),300);
+}
+function errorSound(){tone(180,.2,"sawtooth")}
+function clickSound(){tone(500,.08,"triangle")}
+
+function updateScore(amount){
+score=Math.min(100,score+amount);
+document.getElementById("score").innerText=score;
+document.getElementById("progressFill").style.width=score+"%";
+}
+
+function startGame(){
+clickSound();
+document.getElementById("welcome").classList.add("hidden");
+document.getElementById("game").classList.remove("hidden");
+startStars();
+}
+
+function showStage(n){
+for(let i=1;i<=5;i++){
+document.getElementById("stage"+i).classList.add("hidden");
+}
+document.getElementById("stage"+n).classList.remove("hidden");
+document.getElementById("stageLabel").innerText="اللعبة "+n+" من 5";
+if(n===2)startMemory();
+if(n===3)loadQuestion();
+if(n===5)startReaction();
+}
+
+// اللعبة الأولى: جمع النجوم
+function startStars(){
+starsCollected=0;
+document.getElementById("starCount").innerText=0;
+spawnCollectStar();
+}
+function spawnCollectStar(){
+let area=document.getElementById("starArea");
+area.innerHTML="";
+let star=document.createElement("span");
+star.className="target";
+star.innerText="⭐";
+star.style.left=(5+Math.random()*80)+"%";
+star.style.top=(5+Math.random()*75)+"%";
+star.onclick=()=>{
+clickSound();
+starsCollected++;
+document.getElementById("starCount").innerText=starsCollected;
+if(starsCollected>=5){
+successSound();
+updateScore(20);
+setTimeout(()=>showStage(2),650);
+}else spawnCollectStar();
+};
+area.appendChild(star);
+}
+
+// اللعبة الثانية: الذاكرة
+let firstCard=null,secondCard=null,locked=false,matched=0;
+function startMemory(){
+let grid=document.getElementById("memoryGrid");
+grid.innerHTML="";
+firstCard=secondCard=null;
+locked=false;matched=0;
+document.getElementById("memoryStatus").innerText="";
+let symbols=["❤️","🎀","🌸","🖤"];
+let cards=[...symbols,...symbols].sort(()=>Math.random()-.5);
+cards.forEach(symbol=>{
+let card=document.createElement("div");
+card.className="memory-card";
+card.innerText="❔";
+card.dataset.symbol=symbol;
+card.onclick=()=>{
+if(locked||card.innerText!=="❔")return;
+clickSound();
+card.innerText=symbol;
+if(!firstCard){firstCard=card;return}
+secondCard=card;
+locked=true;
+if(firstCard.dataset.symbol===secondCard.dataset.symbol){
+firstCard.classList.add("done");
+secondCard.classList.add("done");
+matched++;
+successSound();
+firstCard=secondCard=null;
+locked=false;
+if(matched===symbols.length){
+document.getElementById("memoryStatus").innerText="برافو! ذاكرتك ممتازة ❤️";
+updateScore(20);
+setTimeout(()=>showStage(3),850);
+}
+}else{
+errorSound();
+setTimeout(()=>{
+firstCard.innerText="❔";
+secondCard.innerText="❔";
+firstCard=secondCard=null;
+locked=false;
+},750);
+}
+};
+grid.appendChild(card);
+});
+}
+
+// اللعبة الثالثة: الأسئلة
+const questions=[
+{q:"إيه التاريخ اللي معمول عشانه الموقع؟",a:["10 نوفمبر","11 نوفمبر","12 نوفمبر"],correct:1},
+{q:"الساعة المميزة في رسالتك كام؟",a:["10:10","12:12","11:11"],correct:2},
+{q:"الرسالة دي معمولة لمين؟",a:["شخص غالي ❤️","شخص عادي","حد مش معروف"],correct:0}
+];
+function loadQuestion(){
+let q=questions[currentQuestion];
+document.getElementById("questionText").innerText=q.q;
+document.getElementById("quizFeedback").innerText="";
+let list=document.getElementById("answerList");
+list.innerHTML="";
+q.a.forEach((answer,i)=>{
+let btn=document.createElement("button");
+btn.className="answer";
+btn.innerText=answer;
+btn.onclick=()=>{
+if(btn.disabled)return;
+clickSound();
+if(i===q.correct){
+btn.classList.add("good");
+document.querySelectorAll(".answer").forEach(b=>b.disabled=true);
+document.getElementById("quizFeedback").innerText="إجابة صحيحة! ✨";
+successSound();
+currentQuestion++;
+if(currentQuestion===questions.length){
+currentQuestion=0;
+updateScore(20);
+setTimeout(()=>showStage(4),800);
+}else setTimeout(loadQuestion,800);
+}else{
+btn.classList.add("bad");
+document.getElementById("quizFeedback").innerText="حاولي تاني 😂";
+errorSound();
+setTimeout(()=>btn.classList.remove("bad"),600);
+}
+};
+list.appendChild(btn);
+});
+}
+
+// اللعبة الرابعة: النجمة
+function tapStar(){
+clickSound();
+taps++;
+document.getElementById("tapCount").innerText=taps;
+if(taps>=10){
+taps=0;
+successSound();
+updateScore(20);
+setTimeout(()=>{
+document.getElementById("tapCount").innerText=0;
+showStage(5);
+},600);
+}
+}
+
+// اللعبة الخامسة: رد الفعل
+function startReaction(){
+let box=document.getElementById("reactionBox");
+document.getElementById("reactionResult").innerText="";
+reactionReady=false;
+box.innerText="استني الإشارة... ⏳";
+box.style.background="#282431";
+clearTimeout(reactionTimer);
+reactionTimer=setTimeout(()=>{
+reactionReady=true;
+reactionStart=performance.now();
+box.innerText="اضغطي الآن! ⚡";
+box.style.background="#24583d";
+},1500+Math.random()*3000);
+}
+function reactionClick(){
+let box=document.getElementById("reactionBox");
+if(!reactionReady){
+clearTimeout(reactionTimer);
+box.innerText="بدري! استني الإشارة 😂";
+errorSound();
+setTimeout(startReaction,1000);
+return;
+}
+let ms=Math.round(performance.now()-reactionStart);
+document.getElementById("reactionResult").innerText="زمن استجابتك: "+ms+" مللي ثانية ⚡";
+reactionReady=false;
+successSound();
+updateScore(20);
+setTimeout(()=>{
+document.getElementById("game").classList.add("hidden");
+document.getElementById("final").classList.remove("hidden");
+celebrate();
+},1100);
+}
+
+// الاحتفال
+function celebrate(){
+successSound();
+for(let i=0;i<40;i++){
+let el=document.createElement("div");
+el.className="heart-float";
+el.innerText=["❤️","🖤","💜","✨","🌸","⭐"][Math.floor(Math.random()*6)];
+el.style.left=Math.random()*100+"%";
+el.style.fontSize=(17+Math.random()*22)+"px";
+el.style.animationDuration=(4+Math.random()*5)+"s";
+document.body.appendChild(el);
+setTimeout(()=>el.remove(),9500);
+}
+}
+
+// إرسال الرسالة
+async function sendReply(){
+let message=document.getElementById("reply").value.trim();
+let status=document.getElementById("replyStatus");
+let button=document.getElementById("sendButton");
+
+if(!message){
+status.innerText="اكتبي رسالتك الأول ❤️";
+errorSound();
+return;
+}
+
+button.disabled=true;
+status.innerText="جاري إرسال رسالتك...";
+
+try{
+let response=await fetch("https://formspree.io/f/xppzronk",{
+method:"POST",
+headers:{
+"Content-Type":"application/json",
+"Accept":"application/json"
+},
+body:JSON.stringify({
+message:message,
+subject:"رسالة من صاحبة 11:11 💌"
+})
+});
+
+if(response.ok){
+status.innerText="وصلت رسالتك بنجاح ❤️";
+document.getElementById("reply").value="";
+successSound();
+}else{
+status.innerText="حصلت مشكلة في الإرسال. حاولي تاني.";
+errorSound();
+}
+}catch(e){
+status.innerText="تأكدي من الإنترنت وحاولي تاني.";
+errorSound();
+}
+button.disabled=false;
+}
+
+// خلفية النجوم
+const bg=document.getElementById("starBg");
+for(let i=0;i<45;i++){
+let s=document.createElement("span");
+s.className="twinkle";
+s.innerText="✦";
+s.style.left=Math.random()*100+"%";
+s.style.top=Math.random()*100+"%";
+s.style.fontSize=(8+Math.random()*12)+"px";
+s.style.animationDelay=Math.random()*3+"s";
+bg.appendChild(s);
+}
+</script>
+
+</body>
+</html>
